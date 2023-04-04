@@ -34,7 +34,10 @@ my_data_row = my_cur.fetchone()
 streamlit.text("The fruit load list contains:")
 streamlit.text(my_data_row)
 
-word = streamlit.text_input("Which Fruit do you want to Add", "Which Fruit do you want to Add", label_visibility='hidden')
-if word is not None:
-    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('{}')".format(word))
+word = streamlit.text_input("Which Fruit do you want to Add")
+if streamlit.button("Add a Fruit to the list"):
+    my_cnx2 = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    with my_cnx2.cursor() as my_cur:
+        my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('{}')".format(word))
+        print('Thanks for your addition')
 
