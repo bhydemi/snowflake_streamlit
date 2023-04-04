@@ -34,5 +34,5 @@ streamlit.text(my_data_row)
 
 word = streamlit.text_input("Which Fruit do you want to Add", "Which Fruit do you want to Add", label_visibility='hidden')
 if word is not None:
-    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ({})".format(word))
+    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('{}')".format(word))
 
